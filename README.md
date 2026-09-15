@@ -1,111 +1,21 @@
-# AI 導入機會盤點 Skill｜ai-opportunity-assessment
+AI Opportunity Assessment Skill
 
-> 讓每一次 AI 導入決策，都有同一把尺。 把「顧問訪談後憑經驗手寫建議」變成一套可重複、可稽核、可跨案比較的標準化決策流程。
+Turn a single client kick-off interview into a standardized, decision-ready AI adoption roadmap — in hours, not days.
 
-一個為 AI 導入顧問情境設計的 Claude Code Skill：在客戶 kick-off 訪談後，自動將訪談逐字稿整理成標準化的\*\*「AI 導入機會盤點表」\*\*，回答三件事——**哪些任務值得導入 AI、預期省多少工時、建議從哪個開始做**。適用任何產業（電商、B2B SaaS、傳產、專業服務業），判準固定、格式一致。
+A Claude Code skill built from real digital-transformation consulting practice. It converts messy interview notes into one comparable scorecard that answers three questions every client asks: which tasks are worth automating, how much time each saves, and what to build first.
 
----
+Why it matters
 
-## 一、作品發想
+Most post-interview "AI recommendations" are hand-written, inconsistent, and impossible to compare. This skill makes the judgment repeatable — same criteria, same format, same prioritization logic across every client and industry.
 
-顧問開完第一次需求會議，交回來的「AI 導入建議」常常是一份手寫 Word：判斷標準看心情、格式每次不一樣，兩個機會點放在一起根本無法比較該先做哪個，而且**漏掉的機會永遠不會知道被漏掉**。
+What it delivers
+Prioritized opportunity table — each task scored by time saved × implementation difficulty, ranked P0 / P1 / P2 with a one-line rationale.
+Traceable & honest — every item maps back to what the client actually said; all estimates are explicitly flagged as assumptions, never passed off as client data.
+Knows its limits — when input is thin, it returns an open-questions list instead of inventing answers.
+Business value
+Cuts post-kick-off analysis from days to hours.
+Gives clients one comparable basis for allocating AI budget across teams.
+Auditable output that doubles as training material for junior consultants.
+Industry-agnostic — same framework for e-commerce, B2B SaaS, manufacturing, or professional services.
 
-這個 Skill 的發想，就是把「訪談後整理 AI 導入建議」這件最吃顧問個人經驗的事，變成一套固定的標準作業：同樣的判準、同樣的表格、同樣的排序邏輯——客戶拿到的不是顧問的個人心得，而是一張能跨部門、跨機會直接比較的決策表。
-
-## 二、目的與使用時機
-
-**目的**：在「顧問開完 kick-off 會議之後、客戶做導入決策之前」，於短時間內產出一份可決策、可稽核的 AI 導入機會盤點表。
-
-**典型場景**：
-
-- 開完 kick-off 會議，想知道「所以我們到底該從哪裡開始」  
-- 多個部門都想用 AI，需要一張表決定資源先給誰  
-- 把會議紀錄交給顧問，要求 48 小時內給出可決策的建議
-
-換產業不換尺——流程與判斷標準完全相同。
-
----
-
-## 三、核心設計
-
-### 六步驟方法論
-
-1. **抽取任務與痛點**——通讀訪談，抽取所有「重複發生、有明確流程」的任務，每項標註訪談原文出處，不腦補訪談中沒有的任務。  
-2. **分類 AI 任務類型**——標記為生成型（產出文字／內容）、判斷型（分類／評分／排序）、事實查詢型（檢索彙整既有資訊）。  
-3. **估算工時節省**——有數據時以「單件時間 × 件數 × AI 可承接比例」計算；無數據時以產業基準估算並明標假設。  
-4. **評估導入難度**——以「資料就緒度 × 流程變動幅度」兩維度評分。  
-5. **排定優先級並寫理由**——以「工時節省 × 導入難度」矩陣排 P0／P1／P2，每個 P0／P1 附一句比較式理由。  
-6. **產出盤點表與待補清單**——資料不足的欄位不硬填，改列入表尾「待補問題清單」。
-
-### 三條品質把關規則（本 Skill 的核心價值）
-
-| 規則 | 內容 | 防的問題 |
-| :---- | :---- | :---- |
-| **可追溯規則** | 每個機會點的痛點都必須對應訪談原文具體段落，對不上就刪除 | AI 自行想像出訪談中沒有的痛點 |
-| **P0 門檻規則** | P0 必須同時滿足「難度低或中」且「節省有數字」，不合格自動降級並註明原因 | 因節省數字大就給高優先級 |
-| **假設透明規則** | 所有估算值強制標註「估算值（假設：……）」 | 把顧問推估講得像客戶實際數據 |
-
-### 輸出格式
-
-一張「AI 導入機會盤點表」，每個機會點含六欄：**情境名稱｜目前流程與痛點（附訪談出處）｜AI 任務類型｜預估工時節省｜導入難度｜建議優先級（P0／P1／P2＋先做原因）**，表尾附「待補問題清單」。
-
----
-
-## 四、為什麼不直接問 ChatGPT？
-
-直接把會議紀錄丟給 ChatGPT，也會得到「看起來很像建議」的東西。差別在四點：
-
-- **判準固定**——優先級不是 AI 即興意見，P0 有硬門檻，每個客戶用同一把尺。  
-- **數字誠實**——估算值強制標註假設，永遠分得出哪些是客戶數據、哪些是顧問推估。  
-- **可追溯**——每個機會點都對應客戶實際說過的話，對不上直接刪。  
-- **知道自己不知道**——資料不足時輸出待補問題清單，而不是編一個答案。
-
-> 一句話：ChatGPT 給的是一次性聊天回覆；這個 Skill 給的是一套可重複、可稽核、可跨案比較的決策標準。
-
----
-
-## 五、測試與驗證結果
-
-交付前經過四組測試案例驗證，每組針對一條設計機制：
-
-| 測試 | 輸入情境 | 驗證重點 | 結果 |
-| :---- | :---- | :---- | :---- |
-| **測試 1｜完整資料** | 逐字稿＋團隊規模＋量化數據 | 六欄齊全、可追溯至原文、P0 附比較式理由 | ✅ 通過 |
-| **測試 2｜缺量化數據** | 只有抱怨沒有數字 | 工時節省欄以「估算值（假設：…）」標註，待補清單要求補時間紀錄 | ✅ 通過 |
-| **測試 3｜資料殘缺** | 僅兩三句片段 | 輸出「待補問題清單」而非硬編機會點 | ✅ 通過 |
-| **測試 4｜P0 門檻誘餌** | 放入「節省大但難度高」的任務 | 品質規則自動降為 P1 並註明原因 | ✅ 通過 |
-
-**陷阱整合測試**（單段訪談同時埋三個陷阱）結果：
-
-- 陷阱一（P0 門檻）：40 小時節省但底稿為紙本掃描 → 正確降為 P1／P2 並註明「需先完成底稿數位化」。✅  
-- 陷阱二（假設透明）：進度詢問信無量化數據 → 正確以「估算值（假設：…）」標註並要求補 2 週時間紀錄。✅  
-- 陷阱三（可追溯）：一次性的「搬辦公室」事件 → 正確排除、不列入盤點表。✅  
-- 附帶驗證：兩位發言者對「最痛點」看法不一致 → 訪購出處欄分別標明發言者，供決策參考。✅
-
-> 驗證結論：四條設計機制在陷阱題下皆正確觸發；資料不足處以待補問題清單呈現，兼具決策文件與新進顧問教育訓練的價值。
-
----
-
-## 六、技術與工具
-
-- **產出工具**：Claude Code（agent 工具）為主，輔以 ChatGPT、Gemini 進行資料整理與內容校閱。  
-- **自建 Skill**：`claude-council`（多角度審稿）、`skill-creator`（SKILL.md 結構設計）、`markdown`（文件格式轉換）。  
-- **形式**：Claude Code Skill（`SKILL.md`），以自然語言觸發呼叫，不需導入任何系統、不需 IT 配合，一份會議紀錄即可啟動。
-
-## 七、檔案結構
-
-ai-opportunity-assessment/
-
-├── README.md                     \# 本說明
-
-├── SKILL.md                      \# Skill 定義（觸發條件、步驟、輸出格式、品質規則、失敗回退）
-
-└── docs/
-
-&nbsp;&nbsp;&nbsp;&nbsp;└── AI\_Opportunity\_Agent\_Manual.pdf   \# 客戶使用手冊
-
-## 八、作者
-
-Sophie｜AI PM／顧問（工程師背景 × 政府數位轉型輔導經驗）
-
-&nbsp;
+See SKILL.md for the full specification and docs/ for the client usage manual.
